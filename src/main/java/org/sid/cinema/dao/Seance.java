@@ -4,11 +4,11 @@ import java.util.Date;
 
 import org.springframework.data.jpa.repository.Temporal;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.TemporalType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +21,7 @@ public class Seance {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@jakarta.persistence.Temporal(TemporalType.TIMESTAMP)
+   @javax.persistence.Temporal(TemporalType.TIMESTAMP)
 	private Date hereDebut;
 
 }
