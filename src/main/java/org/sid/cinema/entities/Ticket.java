@@ -1,7 +1,8 @@
-package org.sid.cinema.dao;
+package org.sid.cinema.entities;
 
 import org.hibernate.annotations.ManyToAny;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class Ticket {
 	private Long id;
 	private String nomClient;
 	private double prix;
+	@Column(unique = true)
 	private int codePayement;
 	private boolean reserve;
 	@ManyToOne

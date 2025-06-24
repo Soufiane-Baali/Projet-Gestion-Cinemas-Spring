@@ -1,4 +1,4 @@
-package org.sid.cinema.dao;
+package org.sid.cinema.entities;
 
 import java.util.Collection;
 
@@ -17,8 +17,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Salle   {
-  private Long id;
+  
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+  private Long id;
   private String name;
   private int nombrePlace;
   @ManyToOne
