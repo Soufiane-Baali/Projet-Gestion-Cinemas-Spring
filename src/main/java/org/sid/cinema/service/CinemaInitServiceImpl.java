@@ -1,5 +1,8 @@
 package org.sid.cinema.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
@@ -13,7 +16,9 @@ import org.sid.cinema.dao.SeanceRepository;
 import org.sid.cinema.dao.TicketRepository;
 import org.sid.cinema.dao.VilleRepository;
 import org.sid.cinema.entities.Cinema;
+import org.sid.cinema.entities.Place;
 import org.sid.cinema.entities.Salle;
+import org.sid.cinema.entities.Seance;
 import org.sid.cinema.entities.Ville;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +43,7 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
 	private CategorieRepository categorieRepository;
 	@Autowired
 	private TicketRepository ticketRepository;
-	
+
 	@Override
 	public void initVilles() {
 		Stream.of("Paris", "Nice", "Monaco", "Epinal").forEach(nameVille -> {
@@ -59,6 +64,7 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
 				cinema.setName(nameCinema);
 				cinema.setNombreSalles(3 + (int) (Math.random() * 7));
 				cinema.setVille(v);
+				cinemaRepository.save(cinema);
 
 			});
 		});
@@ -80,14 +86,30 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
 
 	@Override
 	public void initPlaces() {
-		// TODO Auto-generated method stub
-
+		salleRepository.findAll().forEach(salle -> {
+			for (int i = 0; i < salle.getNombrePlace(); i++) {
+				Place place = new Place();
+				place.setNumero(i + 1);
+				place.setSalle(salle);
+				placeRepository.save(place);
+			}
+		});
 	}
 
 	@Override
 	public void initSeances() {
-		// TODO Auto-generated method stub
-
+   DateFormat dateFormat =new SimpleDateFormat("HH:mm");
+		Stream.of("12:00","15:00","17:00","19:00","21:00").forEach(s -> {
+    	Seance seance=new Seance();
+    	try {
+			seance.setHeureDebut(dateFormat.parse(s));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    });
+		
 	}
 
 	@Override
