@@ -22,6 +22,6 @@ public class Seance {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
    @javax.persistence.Temporal(TemporalType.TIMESTAMP)
-	private Date hereDebut;
+	private Date heureDebut;
 
 }
